@@ -5,16 +5,9 @@ import { Component } from '../interface/interface'
 import {
     Project,
     Node,
-    SourceFile,
-    TypeChecker,
-    SyntaxKind,
     ImportDeclaration,
-    ClassDeclaration,
-    MethodDeclaration,
     CallExpression,
     Identifier,
-    PropertyDeclaration,
-    PropertySignature,
     JsxOpeningElement,
     JsxElement,
     VariableDeclarationList
@@ -97,9 +90,6 @@ export class FileParser {
                 });
             }
         });
-    }
-    public getComponents(): Component[] {
-        return this._components
     }
 
     public toMarkdown(): string {
