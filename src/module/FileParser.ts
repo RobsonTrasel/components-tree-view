@@ -1,5 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
+import * as commander from 'commander'
 import { Component } from '../interface/interface'
 import {
     Project,
@@ -97,8 +98,44 @@ export class FileParser {
             }
         });
     }
-
     public getComponents(): Component[] {
-        return this._components;
+        return this._components
+    }
+
+    public toMarkdown(): string {
+        let markdown = "# Components\n"
+        this._components.forEach((component) => {
+            markdown += `## ${component.name}\n`;
+            markdown += `Parent: ${component.parent}\n`;
+            markdown += `Dependencies: ${component.dependencies.join(", ")}\n`;
+            markdown += `State Variables: ${component.statesVariables.join(", ")}\n`;
+            markdown += `Hooks: ${component.hooks.join(", ")}\n`;
+          });
+        return markdown;
+    }
+
+    public toString(): string {
+        let string = "Components:\n";
+        this._components.forEach((component) => {
+          string += `- ${component.name}\n`;
+          string += `  Parent: ${component.parent}\n`;
+          string += `  Dependencies: ${component.dependencies.join(", ")}\n`;
+          string += `  State Variables: ${component.statesVariables.join(", ")}\n`;
+          string += `  Hooks: ${component.hooks.join(", ")}\n`;
+        });
+        return string;
     }
 }
+
+export const program = new commander.Command()
+
+program
+    .command("map <filePath>")
+    .description("Parse a file and output the results in string and markdown formats.")
+    .action((filePath) => {
+        const parser = new FileParser();
+        parser.parseFile(path.resolve(filePath));
+        const markDown = parser.toMarkdown();
+        fs.writeFileSync(`${filePath}.md`, markDown);
+        console.log(parser.toString());
+    })
