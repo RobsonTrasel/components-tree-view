@@ -12,11 +12,11 @@ import {
     MethodDeclaration,
     CallExpression,
     Identifier,
-    VariableDeclaration,
     PropertyDeclaration,
     PropertySignature,
     JsxOpeningElement,
-    JsxElement
+    JsxElement,
+    VariableDeclarationList
 } from 'ts-morph'
 
 export class FileParser {
@@ -54,7 +54,7 @@ export class FileParser {
                     }
                 }
             }
-            if (node instanceof VariableDeclaration) {
+            if (node instanceof VariableDeclarationList) {
                 node.getDeclarations().forEach((declaration) => {
                     if (declaration.getNameNode() instanceof Identifier) {
                         this._components.forEach((component) => {
