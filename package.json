@@ -1,9 +1,16 @@
 {
-  "name": "components-tree-view",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "ts-components-tree-viewer",
+  "author": {
+    "name": "robsonf",
+    "email": "robson.trasel@gmail.com"
+  },
+  "files": [
+    "/dist"
+  ],
+  "version": "1.0.1",
+  "main": "dist/index.js",
   "type": "commonjs",
-  "types": "dist/",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^18.11.18",

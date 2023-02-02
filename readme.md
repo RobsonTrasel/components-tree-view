@@ -32,7 +32,7 @@ Add for you package.json:
 
 ```
 "scripts": {
-    "map": "node dist/index.js --file="
+    "map": "node dist/index.js"
 }
 ```
 
